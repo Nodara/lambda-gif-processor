@@ -1,0 +1,36 @@
+service: create-gif
+
+plugins:
+  - serverless-offline
+  - serverless-esbuild
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  region: ${opt:region, self:provider.region}
+  esbuild:
+    bundle: true
+    platform: node
+    target: node18
+    exclude:
+      - aws-sdk
+    external:
+      - fluent-ffmpeg
+          
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  stage: prod
+  timeout: 30
+  profile: default
+  architecture: arm64
+
+functions:
+  # NOTE: temp, better to invoke this lambda function by using AWS Event Bridge
+  createGif: 
+    handler: handler.createGif
+    events:
+      - http:
+          path: /gif
+          method: get
+          

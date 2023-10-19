@@ -1,0 +1,1 @@
+This GitHub project provides a minimal example of how to leverage AWS Lambda, the Serverless Framework, Node.js streams, aws-sdk and the fluent-ffmpeg library to automate the process of fetching a video from an Amazon S3 bucket, converting it into a GIF, and uploading GIF during generation to the S3 bucket.
